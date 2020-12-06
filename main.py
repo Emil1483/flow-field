@@ -28,7 +28,7 @@ def field_func(pos: Vector) -> Vector:
     dx = y
     dy = -0.2 * y - 2 * math.sin(x)
 
-    return Vector([dx, dy]).div(res).scale(1.0)
+    return Vector([dx, dy]).div(res).scale(5.0)
 
 
 vector_field = Vector_Field(screen, screen_size, field_func)
@@ -41,23 +41,24 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             x, y = pos
-            vector_field.add_particle(Particle(screen_size, pos=[x, screen_h - y]))
+            vector_field.add_particle(Particle(screen_size, pos=[x, screen_h - y], special=True))
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 vector_field.remove_particle()
+
     screen.fill((0, 0, 0))
 
     vector_field.show()
     for _ in range(res):
         vector_field.update()
-
-    for particle in vector_field.particles:
+    
+    particle = vector_field.particles[0]
+    if particle.special:
         angle = transform(particle.pos, screen_size).x
         render_pendulum(
             screen,
             screen_size,
             angle,
-            alpha=particle.life_value,
             ball=particle.color
         )
 

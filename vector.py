@@ -23,6 +23,10 @@ class Vector:
     @property
     def y(self):
         return self.array[1]
+    
+    @property
+    def rounded(self):
+        return [round(x) for x in self.array]
 
     def scale(self, scalar):
         return Vector([element * scalar for element in self.array])

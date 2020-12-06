@@ -21,7 +21,7 @@ class Vector_Field:
         self.size = size
 
         self.function = function
-        self.particles = [Particle(size) for _ in range(1)]
+        self.particles = [Particle(size) for _ in range(70)]
 
     def show(self):
         # w, h = self.size
@@ -42,11 +42,12 @@ class Vector_Field:
             particle.update(self.function(particle.pos))
     
     def add_particle(self, particle):
-        if (len(self.particles) >= 3):
-            del self.particles[0] 
-        self.particles.append(particle)
+        del self.particles[0] 
+        self.particles.insert(0, particle)
     
     def remove_particle(self):
         if len(self.particles) is 0:
+            return
+        if not self.particles[0].special:
             return
         del self.particles[0]
