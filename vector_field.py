@@ -42,12 +42,11 @@ class Vector_Field:
             particle.update(self.function(particle.pos))
     
     def add_particle(self, particle):
-        del self.particles[0] 
+        if self.particles[0].special:
+            del self.particles[0] 
         self.particles.insert(0, particle)
     
     def remove_particle(self):
-        if len(self.particles) is 0:
-            return
         if not self.particles[0].special:
             return
         del self.particles[0]
