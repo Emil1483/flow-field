@@ -7,16 +7,6 @@ from particle import *
 
 class Vector_Field:
     def __init__(self, screen, size: list, function):
-        '''
-        screen, size, function
-        pass in function of type
-
-            Vector(px, py) => Vector(x, y)
-
-        pass in screen size of type
-
-            [width, height]
-        '''
         self.screen = screen
         self.size = size
 
