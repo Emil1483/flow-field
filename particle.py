@@ -7,6 +7,15 @@ from color_utils import *
 
 
 class Particle:
+    '''
+    A physics-driven particle that can move around the screen.
+
+    If the particle's
+
+        special
+    variable is true, it will not reset and it will be shown with
+    color as a ball, and not a curve.
+    '''
     def __init__(self, size: list, pos: list = None, special = False):
         self.size = size
         self.tales = []
@@ -15,6 +24,14 @@ class Particle:
         self.color = random_color() if special else (255, 255, 255)
 
     def reset(self, pos: list = None):
+        '''
+        Resets the position of the particle to a random position
+        on the display if a position is not given.
+
+        If the particle is special, the particle does not get a
+        
+            max_len, life_len or a tale.
+        '''
         w, h = self.size
         self.pos = Vector(
             [
@@ -34,6 +51,15 @@ class Particle:
         self.tales.append([])
 
     def update(self, vel: Vector):
+        '''
+        Updates the position of the particle given a velocity vector.
+
+        If the particle is not special, it will get reset if
+
+            life_len <= 0
+
+        or if it's outside of the display
+        '''
         self.pos += vel
 
         if self.special:
@@ -45,9 +71,20 @@ class Particle:
 
     @property
     def life_value(self):
+        '''
+        A float (0-1) that represent how alive a particle is.
+        If its at its end of its life, it will return 0 and 1
+        if it has lots of life left.
+        '''
         return self.life_left / self.max_len
 
     def show(self, screen):
+        '''
+        Draws a circle at its position if the particle is not special.
+
+        Else, it draws its tale, appends to the tale, and remove the
+        previous tale's end if it exists.
+        '''
         w, h = self.size
 
         if self.special:

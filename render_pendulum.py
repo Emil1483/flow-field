@@ -4,6 +4,10 @@ import math
 from color_utils import *
 
 def render_pendulum(screen, size, angle, alpha=1.0, ball=(25, 121, 169)):
+    '''
+    Renders a pendulum at the bottom right of the screen,
+    given a current angle.
+    '''
     stick = (237, 184, 121)
 
     stick = color_with_alpha(stick, alpha)

@@ -49,9 +49,9 @@ class Vector_Field:
     
     def add_particle(self, particle):
         '''
-            Adds a special particle to the stored particles
+        Adds a special particle to the stored particles
 
-            Raises an exception if given particle is not special
+        Raises an exception if given particle is not special
         '''
         if not particle.special:
             raise Exception('please only add special particles')
@@ -60,6 +60,9 @@ class Vector_Field:
         self.particles.insert(0, particle)
     
     def remove_particle(self):
+        '''
+        Removes the first particle if it is special
+        '''
         if not self.particles[0].special:
             return
         del self.particles[0]
