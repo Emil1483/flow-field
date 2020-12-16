@@ -5,6 +5,7 @@ from vector import *
 from particle import *
 
 
+
 class Vector_Field:
     '''
     Stores a field such that each (x, y) position in the field
@@ -15,26 +16,16 @@ class Vector_Field:
     This object also manages an array of particles that travels
     in the vector field.
     '''
-    def __init__(self, screen, size: list, function):
+    def __init__(self, screen, function):
         self.screen = screen
-        self.size = size
 
         self.function = function
-        self.particles = [Particle(size) for _ in range(70)]
+        self.particles = [Particle() for _ in range(70)]
 
     def show(self):
         '''
         Renders the particles
         '''
-        # w, h = self.size
-
-        # space = w / 20
-
-        # middle = Vector([w / 2, h / 2])
-        # for y in arange(space / 2, h, space):
-        #     for x in arange(space / 2, w, space):
-        #         pos = Vector([x, y])
-        #         Vector(self.function(pos - middle).array).show(self.screen, pos)
 
         for particle in self.particles:
             particle.show(self.screen)

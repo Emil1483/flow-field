@@ -2,8 +2,9 @@ import pygame
 import math
 
 from color_utils import *
+from global_values import *
 
-def render_pendulum(screen, size, angle, alpha=1.0, ball=(25, 121, 169)):
+def render_pendulum(screen, angle, alpha=1.0, ball=(25, 121, 169)):
     '''
     Renders a pendulum at the bottom right of the screen,
     given a current angle.
@@ -16,10 +17,9 @@ def render_pendulum(screen, size, angle, alpha=1.0, ball=(25, 121, 169)):
     ball_size = 20
     r = 200
 
-    w, h = size
     center = (
-        round(w - r - ball_size),
-        round(h - r - ball_size)
+        round(screen_w - r - ball_size),
+        round(screen_h - r - ball_size)
     )
 
     center_x, center_y = center

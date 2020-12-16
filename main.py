@@ -4,13 +4,9 @@ from vector_field import *
 from vector import *
 from render_pendulum import *
 from transform import *
-
-res = 20
+from global_values import *
 
 pygame.init()
-
-screen_size = [1300, 700]
-screen_w, screen_h = screen_size
 
 screen = pygame.display.set_mode(screen_size)
 
@@ -23,7 +19,7 @@ def field_func(pos: Vector) -> Vector:
     The function should return the gradient of a state
     field.
     '''
-    x, y = transform(pos, screen_size).array;
+    x, y = transform(pos).array;
 
     # infection_rate = 0.02
     # removal_rate = 0.1
@@ -39,7 +35,7 @@ def field_func(pos: Vector) -> Vector:
     return Vector([dx, dy]).div(res).scale(5.0)
 
 
-vector_field = Vector_Field(screen, screen_size, field_func)
+vector_field = Vector_Field(screen, field_func)
 
 running = True
 while running:
@@ -51,7 +47,7 @@ while running:
             # TODO: play sound effect
             pos = pygame.mouse.get_pos()
             x, y = pos
-            vector_field.add_particle(Particle(screen_size, pos=[x, screen_h - y], special=True))
+            vector_field.add_particle(Particle(pos=[x, screen_h - y], special=True))
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 # Remove the special particle
@@ -69,10 +65,9 @@ while running:
     if particle.special:
         # Only show a pendulum if the first particle is special
         # The particle's x position represents the pendulum's angle
-        angle = transform(particle.pos, screen_size).x
+        angle = transform(particle.pos).x
         render_pendulum(
             screen,
-            screen_size,
             angle,
             ball=particle.color
         )

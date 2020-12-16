@@ -4,7 +4,7 @@ import math
 
 from vector import *
 from color_utils import *
-
+from global_values import *
 
 class Particle:
     '''
@@ -16,8 +16,7 @@ class Particle:
     variable is true, it will not reset and it will be shown with
     color as a ball, and not a curve.
     '''
-    def __init__(self, size: list, pos: list = None, special = False):
-        self.size = size
+    def __init__(self, pos: list = None, special = False):
         self.tales = []
         self.special = special
         self.reset(pos)
@@ -32,11 +31,10 @@ class Particle:
         
             max_len, life_len or a tale.
         '''
-        w, h = self.size
         self.pos = Vector(
             [
-                random.uniform(0, w),
-                random.uniform(0, h)
+                random.uniform(0, screen_w),
+                random.uniform(0, screen_h)
             ]
             if pos is None else pos
         )
@@ -46,7 +44,6 @@ class Particle:
 
         self.max_len = 30
         self.life_left = random.uniform(self.max_len / 2, self.max_len)
-        w, h = self.size
 
         self.tales.append([])
 
@@ -65,8 +62,7 @@ class Particle:
         if self.special:
             return
 
-        w, h = self.size
-        if self.life_left <= 0 or self.pos.get_sq_mag() > w**2 + h**2:
+        if self.life_left <= 0 or self.out_of_bounds(self.pos):
             self.reset()
 
     @property
@@ -77,6 +73,9 @@ class Particle:
         if it has lots of life left.
         '''
         return self.life_left / self.max_len
+    
+    def out_of_bounds(self, pos: Vector):
+        return pos.x > screen_w or pos.x < 0 or pos.y > screen_h or pos.y < 0
 
     def show(self, screen):
         '''
@@ -85,11 +84,10 @@ class Particle:
         Else, it draws its tale, appends to the tale, and remove the
         previous tale's end if it exists.
         '''
-        w, h = self.size
 
         if self.special:
             x, y = self.pos.rounded
-            pygame.draw.circle(screen, self.color, (x, h - y), 10)
+            pygame.draw.circle(screen, self.color, (x, screen_h - y), 10)
             return
         
         self.tales[-1].append(self.pos)
@@ -106,7 +104,7 @@ class Particle:
                 pos1 = tale[i]
                 pos2 = tale[i + 1]
 
-                if pos2.get_sq_mag() > w**2 + h**2:
+                if self.out_of_bounds(pos2):
                     continue
 
                 x1, y1 = pos1.rounded
@@ -116,4 +114,4 @@ class Particle:
                 color = color_with_alpha(self.color, alpha)
 
                 pygame.draw.line(screen, color,
-                                 (x1, h - y1), (x2, h - y2), 3)
+                                 (x1, screen_h - y1), (x2, screen_h - y2), 3)
