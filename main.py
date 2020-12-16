@@ -7,8 +7,12 @@ from transform import *
 from global_values import *
 
 pygame.init()
+pygame.mixer.init()
 
 screen = pygame.display.set_mode(screen_size)
+
+music = pygame.mixer.music.load('shallow.mp3')
+pygame.mixer.music.play(-1)
 
 def field_func(pos: Vector) -> Vector:
     '''
