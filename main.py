@@ -5,6 +5,9 @@ from vector import *
 from render_pendulum import *
 from transform import *
 from global_values import *
+from humor_start import *
+
+humor_start()
 
 pygame.init()
 pygame.mixer.init()
@@ -48,14 +51,12 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
             # Add a special particle
-            # TODO: play sound effect
             pos = pygame.mouse.get_pos()
             x, y = pos
             vector_field.add_particle(Particle(pos=[x, screen_h - y], special=True))
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 # Remove the special particle
-                # TODO: play sound effect
                 vector_field.remove_particle()
 
     screen.fill((0, 0, 0))
