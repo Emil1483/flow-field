@@ -12,6 +12,6 @@ Det blir simulert 70 pendeler om gangen. disse beveger seg på skjermen som hvit
 
 Funskjonen som definerer denne bevegelsen er:
 
-![funksjon](https://latex.codecogs.com/svg.latex?{\vec{v}}(x,%20y)%20=%20\begin{bmatrix}y\\-{\mu}%20*%20x%20-%20k%20*%20math.sin(x)\end{bmatrix})
+![funksjon](./function.svg)
 
-Hvor v er en hastighetsvektor, x er vinkelen til pendelet og y er hastigheten til pendelet. Funskjonen beskriver diff-ligningen til et pendel
+Hvor v er hastighetsvektoren, x er vinkelen til pendelet og y er hastigheten til pendelet. Funskjonen beskriver altså diff-ligningen til et pendel
