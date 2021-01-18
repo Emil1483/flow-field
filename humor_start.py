@@ -12,7 +12,7 @@ def humor_start():
         print('Å nei')
         raise ValueError('Oops, der skrev du visst feil. Prøv igjen.')
 
-    print('Ok, fornøyd med den', end='\n\n')
+    print(f'karakteren "{grade}" er lagret i våre systemer. Denne karakteren er bindende', end='\n\n')
     print('Controls:')
     print('  Trykk hvor som helst på programmet for å lage et pendel')
     print('  Trykk på BACKSPACE for å fjerne pendelet')
